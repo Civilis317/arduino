@@ -1,4 +1,4 @@
-int interval = 180;
+int MAX_INTERVAL = 500;
 int potMeterPin = 0; 
 int potMeterValue;
 
@@ -24,6 +24,10 @@ void fireLed(int pin) {
   potMeterValue = analogRead(potMeterPin);
 
   digitalWrite(pin, HIGH);
-  delay(potMeterValue);
+  delay(getScaledInterval(potMeterValue));
   digitalWrite(pin, LOW);
+}
+
+int getScaledInterval(int value) {
+  return map(value, 0, 1023, 0, 255);
 }
